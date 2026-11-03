@@ -228,12 +228,8 @@ async function stage(includeTests) {
     entries.tests = path.join(testSource, "Main.ts");
     assertExists(entries.tests);
   }
-  await viteBuild({ configFile: false, root: repository, publicDir: false,
-    plugins: [sharedRuntimePlugin()], build: { outDir: javascript, emptyOutDir: true,
-      minify: false, sourcemap: true, target: "es2022", rollupOptions: { input: entries,
-        external: ["better-sqlite3"], preserveEntrySignatures: "strict",
-        output: { format: "es", entryFileNames: "[name].js", chunkFileNames: "node_modules/polyglot-sqlite/chunks/[name]-[hash].js" },
-      } },
+  await viteBuild({ configFile: path.join(repository, "vite.config.mts"), mode: "polyglot-sqlite",
+    plugins: [sharedRuntimePlugin()], build: { rollupOptions: { input: entries } },
   });
   write(path.join(javascript, "package.json"), '{"private":true,"type":"module"}\n');
   write(path.join(libraryPackage, "package.json"), manifest("polyglot-sqlite"));

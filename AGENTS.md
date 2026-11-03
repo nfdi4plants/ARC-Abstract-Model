@@ -1,6 +1,6 @@
 # Project Context
 
-ARC Data Model is the specification and implementation workspace for the ARC process data model. It contains the normative markdown spec, derived SQL/YAML schema artifacts, examples, reference material, fsdocs documentation, and F# libraries for ProcessCore and the SQL profile.
+ARC Data Model is the specification and implementation workspace for the ARC process data model. It contains the normative markdown spec, derived SQL/YAML schema artifacts, examples, reference material, fsdocs documentation, and the portable ARCBaseModel and PolyglotSQLite F# libraries.
 
 ## Architecture
 
@@ -15,27 +15,23 @@ ARC-Data-Model/
 │       ├── process_provenance/    process provenance base profile
 │       ├── semantic_designation/  semantic designation base profile
 │       └── administrative/        administrative base profile
-├── spec/                         compatibility pointer to docs/spec
 ├── schemas/                      derived schema representations
 │   ├── sql/                       executable SQLite profile and design notes
 │   ├── yml/                       JSON Schema draft 2020-12 expressed in YAML
 │   └── document-db/               placeholder for future document DB schemas
 ├── examples/                     concrete example documents
-│   ├── core/                      schema-shaped core examples
+│   ├── process_core/              schema-shaped process examples
 │   ├── isa/                       legacy/profile-shaped ISA and Datamap examples
 │   └── workflow-run/              placeholder for future Workflow Run examples
 ├── references/                   upstream profiles and preserved prior implementation notes
 ├── src/                          F# implementation projects
 │   ├── ARCBaseModel/             portable Layer 1 domain classes
-│   ├── PolyglotSQLite/           portable SQLite values, drivers, transactions, and CRUD
-│   └── ProcessCore/              existing core, YAML, SQL, and Fable projects
+│   └── PolyglotSQLite/           portable SQLite values, drivers, transactions, and CRUD
 ├── tests/                        Pyxpecto tests
 │   ├── ARCBaseModel.Tests/       shared Layer 1 behavior tests and mapping probe
 │   ├── ARCBaseModel.Native/      handwritten JavaScript, TypeScript, and Python consumers
 │   ├── PolyglotSQLite.Tests/     shared SQLite behavior and database interoperability tests
-│   ├── PolyglotSQLite.Native/    handwritten SQLite package consumers
-│   ├── ProcessCore.Tests/        consolidated core, YAML, and SQL tests
-│   └── SpeedTest/
+│   └── PolyglotSQLite.Native/    handwritten SQLite package consumers
 └── build/                        FAKE build project and task modules
 ```
 
@@ -51,11 +47,12 @@ ARC-Data-Model/
 
 ## Tech Stack
 
-- F# / .NET projects in `src/`: independent `ARCBaseModel` and `PolyglotSQLite` target .NET Standard 2.0; existing consolidated `ProcessCore` retains its own Fable-specific project files.
+- F# / .NET projects in `src/`: independent `ARCBaseModel` and `PolyglotSQLite` target .NET Standard 2.0 and share their sources across Fable targets.
 - FAKE build project under `build/`.
 - fsdocs for generated documentation.
 - Pyxpecto tests, with Fable transpilation paths for JavaScript and Python.
 - JavaScript runtime tests use Node and `better-sqlite3`.
+- `vite.config.mts` configures both native JavaScript library builds; the staging scripts retain curated declaration generation and shared class identity.
 - Python runtime tests use `uv` and Python stdlib `sqlite3`.
 
 ## Layer 1: Portable Domain Model
@@ -66,7 +63,7 @@ Layer 1 represents the base specification as one shared F# domain model for .NET
 - Every entity's `id` is optional. Do not require, generate, or infer IDs, including from names, paths, or other identifiers. This does not make separately required properties such as Dataset `identifiers` optional.
 - SQLite is one possible Layer 2 implementation. Such implementations may require or assign domain IDs and use them extensively for keys, relationships, and identity resolution; their policies do not make IDs mandatory in Layer 1. A separate SQL surrogate-key system is not required by the base model.
 - Preserve supplied values, object references, collection order, and duplicates. Constructors, setters, and collection helpers must not deduplicate, merge, register, canonicalize, or infer identity. Do not reuse existing equality/hash policies to equate entities by name or ID.
-- Keep graph indexes, back-edge maintenance, traversal, fragment resolution, normalization, codecs, persistence, and filesystem/network operations outside Layer 1. Existing ProcessCore behavior is reference material, not a requirement to carry those policies into the base model.
+- Keep graph indexes, back-edge maintenance, traversal, fragment resolution, normalization, codecs, persistence, and filesystem/network operations outside Layer 1.
 
 ### Public API Shape
 
@@ -77,7 +74,7 @@ Layer 1 represents the base specification as one shared F# domain model for .NET
 - Prefer `ResizeArray<T>` for mutable model collections: Fable documents JavaScript arrays and Python lists for this shape. Keep F# lists, maps, and sets internal. Accept native collections at the API boundary; consume any `seq<T>` input into stored collections without filtering or replacing its entity references. Verify F# array representations separately, especially on Python.
 - Simple F# options are acceptable when native callers can supply, read, and clear them through ordinary target-language absence values. Avoid nested options or option wrappers in the public contract. Test omission and clearing explicitly, including that `0`, `false`, and empty text are not treated as absent where applicable.
 - Preserve spec strings (including URLs, paths, dates, and open-ended profile classifications) without introducing .NET-only wrappers or closed enums. Verify native numeric inputs and outputs for Number fields; do not convert numbers into text to simplify interop.
-- Keep stable, curated exports in the native entrypoints. For Layer 1, `build/base-model.mjs` stages `build/out/base-model/js/node_modules/arc-base-model`; `build/base-model-python.py` stages `build/out/base-model/python/arc_base_model`, including `__init__.py`, precise `.pyi` stubs, and `py.typed`. The existing ProcessCore entrypoints remain separate. Export every intended public type with documented names. Staging restores Python erased alternatives emitted as `Any` and hides implementation-only declaration details. Thin native facades may adapt call syntax, but must not duplicate domain logic or require callers to import generated implementation files or Fable runtime helpers.
+- Keep stable, curated exports in the native entrypoints. For Layer 1, `build/base-model.mjs` stages `build/out/base-model/js/node_modules/arc-base-model`; `build/base-model-python.py` stages `build/out/base-model/python/arc_base_model`, including `__init__.py`, precise `.pyi` stubs, and `py.typed`. Export every intended public type with documented names. Staging restores Python erased alternatives emitted as `Any` and hides implementation-only declaration details. Thin native facades may adapt call syntax, but must not duplicate domain logic or require callers to import generated implementation files or Fable runtime helpers.
 - Keep shared source and compile order aligned across target projects. Use the repository's pinned Fable toolchain; keep target-specific interop at explicit boundaries and verify behavior before adopting newer compiler features.
 
 ### Pinned Python Numeric Compatibility
@@ -92,7 +89,7 @@ Fable 5.6.0's [numeric type test](https://github.com/fable-compiler/Fable/blob/e
 
 Use these as API-design references, not as substitutes for the base specification:
 
-- Local class/property patterns: `src/ProcessCore/DefinedTerm.fs` and `Administrative.fs`. Existing `Graph.fs` unions and deduplication behavior are not Layer 1 templates.
+- Local class/property patterns: `src/ARCBaseModel/DefinedTerm.fs` and `src/ARCBaseModel/Administrative.fs`.
 - [arc-validate portable Fable conventions](https://github.com/nfdi4plants/arc-validate/blob/dev/AGENTS.md#portable-fable-code-style): attached class members, explicit backing fields, and generated API review.
 - Concrete AVPR examples: an attached [Author class](https://github.com/nfdi4plants/arc-validate-package-registry/blob/ee5d98536873a8d12140aea778c196eebafe76dd/src/ValidationPackage.Model/Author.fs), plus handwritten [JavaScript](https://github.com/nfdi4plants/arc-validate-package-registry/blob/ee5d98536873a8d12140aea778c196eebafe76dd/tests/ValidationPackage.NativePackageSmoke/javascript.mjs) and [Python consumers](https://github.com/nfdi4plants/arc-validate-package-registry/blob/ee5d98536873a8d12140aea778c196eebafe76dd/tests/ValidationPackage.NativePackageSmoke/python.py). Reuse their API patterns, not their domain-specific defaults or validation policies.
 - [DataHubClient native packages and consumer checks](https://github.com/nfdi4plants/DataHubClient#package-smoke-tests): curated exports and tests using installed packages from native code.
@@ -102,7 +99,7 @@ Use these as API-design references, not as substitutes for the base specificatio
 
 `src/PolyglotSQLite` is an independent .NET Standard 2.0 library with native Node/TypeScript and Python entrypoints. Track milestones, repairs R01-R11, and actual verification in [the PolyglotSQLite plan](plans/polyglot-sqlite.md), updating it in every implementation commit. The [guide](docs/project/polyglot-sqlite.md) describes the supported API and ownership contract.
 
-- Reuse the pinned Microsoft.Data.Sqlite, better-sqlite3, and stdlib sqlite3 providers. Keep ProcessCore self-contained; do not add references from ProcessCore to this library. ARC schemas, entity mappings, and ID policies belong to a future Layer 2 implementation.
+- Reuse the pinned Microsoft.Data.Sqlite, better-sqlite3, and stdlib sqlite3 providers. Keep this library independent of ARCBaseModel. ARC schemas, entity mappings, and ID policies belong to a future Layer 2 implementation.
 - Public values, rows, parameters, transaction scopes, and table metadata are attached classes. Keep ordinary F# unions and maps internal. Preserve all five SQLite storage classes, exact signed int64 values, ordinal columns, duplicate column names, and absence versus SQL NULL.
 - Use explicit Python representation boundaries for native int/float/bytes and transpiled F# numeric/array behavior. Do not apply the ARCBaseModel AST compatibility pass to this library or patch the Fable runtime. Verify compiled output and native consumers; CompiledName behavior differs for methods and properties.
 - Ordinary statements must not commit a surrounding transaction. Validate one statement before provider preparation, generate nested savepoints internally, and keep scripts separate. Borrowed handles require exclusive use and must be idle before wrapping; borrowed Python detect_types=0 is an explicit caller precondition because sqlite3 cannot expose that flag.
@@ -125,7 +122,11 @@ Use these as API-design references, not as substitutes for the base specificatio
 .\build.cmd WatchDocs
 dotnet fsdocs watch
 npm run test:js
+npm run build
+npm run build:py
 ```
+
+`TranspileTS` and `TranspilePy` aggregate both libraries' supported native staging pipelines, including declarations and Python compatibility adaptations. `PackJS` and `PackPy` produce local verification packages under `dist/ts` and `dist/py`.
 
 ## Git & Commits
 
@@ -142,7 +143,7 @@ npm run test:js
 
 Before marking docs plumbing work as done, run an fsdocs build or a targeted markdown/link check when practical. Before marking implementation work as done, run the relevant FAKE test target.
 
-For portable domain API changes, run the shared behavioral tests on .NET, JavaScript, and Python, then inspect the emitted classes and type declarations. `TestBaseModel` covers all three runtimes and native consumers and is included in `RunTests`. The legacy ProcessCore Python suite remains separate; its skipped `runTestsPy` target is not evidence of cross-target support. A skipped or failing target is not a passing check.
+For portable domain API changes, run the shared behavioral tests on .NET, JavaScript, and Python, then inspect the emitted classes and type declarations. `TestBaseModel` covers all three runtimes and native consumers and is included in `RunTests`. `RunTestsDotnet`, `RunTestsJS`, and `RunTestsPy` run both libraries' shared suites for the selected runtime. A skipped or failing target is not a passing check.
 
 The [Layer 1 guide](docs/project/base-model.md) documents construction, native values, build artifacts, and Layer 2 identity policies. The FAKE targets `TestBaseModelDotNet`, `TestBaseModelJS`, `TestBaseModelPy`, and `TestBaseModelNative` can also run independently with their required build dependencies.
 

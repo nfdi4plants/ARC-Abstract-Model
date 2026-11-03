@@ -4,17 +4,14 @@ This file is named `README` so fsdocs ignores it while it still stays next
 to the documentation source it describes.
 
 This folder is the fsdocs source tree for the ARC Data Model documentation.
-Most pages are ordinary Markdown; hands-on ProcessCore examples use literate
-F# scripts so snippets can be compiled and evaluated during `BuildDocs`.
+Most pages are ordinary Markdown; literate F# scripts can also be compiled
+and evaluated during `BuildDocs`.
 
 ## Main Areas
 
 - `index.md` is the documentation landing page.
 - `project/` contains user-facing project guides: overview, implementation
   notes, querying background, references, examples, schemas, and prior art.
-- `core-implementation/` contains executable ProcessCore usage guides. The
-  `.fsx` files are literate fsdocs pages and should keep setup code hidden,
-  examples small, and evaluated output focused.
 - `spec/` contains the normative specification. The three ARC RDM base profiles
   live under `spec/process_provenance/`, `spec/semantic_designation/`, and
   `spec/administrative/`. Entity specifications shared unchanged between base
@@ -39,7 +36,7 @@ index: 1
 
 Use `category` for the sidebar group, `categoryindex` to order groups, and
 `index` to order pages inside a group. Keep normative field definitions in
-`spec/`; use `project/` and `core-implementation/` for didactic guides and
+`spec/`; use `project/` for didactic guides and
 library usage.
 
 ## `_head.html` Customization

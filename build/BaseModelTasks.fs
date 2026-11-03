@@ -83,6 +83,8 @@ let testBaseModelNative = BuildTask.create "TestBaseModelNative" [buildBaseModel
     |> CreateProcess.ensureExitCode
     |> Proc.run
     |> ignore
+    command "node" ["build/base-model.mjs"; "pack-test"]
+    python ["build/base-model-python.py"; "pack-test"; "build/out/base-model/python"]
 }
 
 let testBaseModel =

@@ -1,22 +1,24 @@
 {
-  "name": "processcore-sql-workspace",
+  "name": "arc-base-model-workspace",
   "version": "0.1.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "transpile:js-tests": "dotnet fable tests/ProcessCore.Tests/ProcessCore.Tests.fsproj -o build/out/js-tests --lang JavaScript",
-    "test:js": "npm run transpile:js-tests && node build/out/js-tests/Main.js --fail-on-focused-tests"
+    "build": "dotnet run --project build/build.fsproj -- TranspileTS",
+    "build:base-model": "dotnet run --project build/build.fsproj -- BuildBaseModelJS",
+    "build:sqlite": "dotnet run --project build/build.fsproj -- BuildPolyglotSQLiteJS",
+    "build:py": "dotnet run --project build/build.fsproj -- TranspilePy",
+    "test:js": "dotnet run --project build/build.fsproj -- RunTestsJS"
   },
   "dependencies": {
-    "better-sqlite3": "^12.9.0",
-    "@nfdi4plants/exceljs": "^0.4.0",
-    "isomorphic-fetch": "^3.0.0"
+    "better-sqlite3": "^12.9.0"
   },
   "devDependencies": {
     "typescript": "~5.8.3",
-    "vite": "^7.0.0",
-    "path": "^0.12.7",
-    "vite-plugin-dts": "^4.5.4",
-    "vitest": "^3.1.1"
+    "vite": "^7.0.0"
+  },
+  "allowScripts": {
+    "better-sqlite3@12.9.0": true,
+    "esbuild@0.27.7": true
   }
 }

@@ -2,6 +2,7 @@ module PackageTasks
 
 open MessagePrompts
 open BasicTasks
+open TranspileTasks
 open TestTasks
 open ProjectInfo
 open Helpers
@@ -50,13 +51,18 @@ let packDotNet = BuildTask.create "PackDotNet" [clean; buildSolution; (*runTests
 }
 
 let packJS = BuildTask.create "PackJS" [clean; buildSolution; transpileTS] {
-    Fake.JavaScript.Npm.exec "run build" id 
-    Fake.JavaScript.Npm.exec $"pack --pack-destination {ProjectInfo.npmPkgDir}" id 
+    System.IO.Directory.CreateDirectory(npmPkgDir) |> ignore
+    for package in ["build/out/base-model/js/node_modules/arc-base-model";
+                    "build/out/polyglot-sqlite/js/node_modules/polyglot-sqlite"] do
+        Fake.JavaScript.Npm.exec $"pack {package} --ignore-scripts --pack-destination {npmPkgDir}" id
 }
 
 let packPy = BuildTask.create "PackPy" [clean; buildSolution; transpilePy] {
-    // run python "-m poetry install --no-root" "."
-    run python $"-m uv build -o {ProjectInfo.pyPkgDir}" "."
+    System.IO.Directory.CreateDirectory(pyPkgDir) |> ignore
+    for root, package, distribution, requiresPython in
+        ["build/out/base-model/python", "arc_base_model", "arc-base-model", ">=3.11";
+         "build/out/polyglot-sqlite/python", "polyglot_sqlite", "polyglot-sqlite", ">=3.12"] do
+        run uv $"run --no-sync --cache-dir build/out/uv-cache python build/native_wheel.py {root} {package} {distribution} {pyPkgDir} --requires-python \"{requiresPython}\"" "."
 }
 
 let pack = BuildTask.createEmpty "Pack" [packDotNet; packJS; packPy]

@@ -92,7 +92,7 @@ Sources:
 - <https://github.com/nfdi4plants/ARCtrl.Querymodel/tree/main/src/ARCtrl.QueryModel>
 - <https://github.com/nfdi4plants/ARCtrl.Querymodel/tree/main/src/ARCtrl.QueryModel/ProcessCore>
 
-The current repo keeps preserved query-model reference material under `references/ProcessCore/` and implements current graph/path helpers in `src/ProcessCore/`.
+These upstream sources describe earlier graph and query approaches. Traversal and graph indexes remain outside the current ARCBaseModel Layer 1 library.
 
 ## Mappings And IO
 

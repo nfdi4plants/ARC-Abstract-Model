@@ -42,8 +42,7 @@ and Python, plus handwritten native consumers and TypeScript checking.
 
 Individual FAKE targets are `TestBaseModelDotNet`, `TestBaseModelJS`,
 `TestBaseModelPy`, and `TestBaseModelNative`. The repository's `RunTests` aggregate
-includes the new suite. This does not enable the separate legacy ProcessCore
-Python suite.
+includes this suite alongside PolyglotSQLite verification.
 
 `build/base-model.mjs` creates the JavaScript entrypoint and TypeScript
 declarations under `build/out/base-model/js/node_modules/arc-base-model`.
@@ -112,11 +111,12 @@ entity class definitions.
 
 The executable examples are also acceptance tests:
 
-- [JavaScript consumer](https://github.com/HLWeil/ProcessCore/blob/main/tests/ARCBaseModel.Native/javascript.mjs)
-- [Python consumer](https://github.com/HLWeil/ProcessCore/blob/main/tests/ARCBaseModel.Native/python.py)
-- [TypeScript consumer](https://github.com/HLWeil/ProcessCore/blob/main/tests/ARCBaseModel.Native/consumer.ts)
+- [JavaScript consumer](https://github.com/HLWeil/ARC-Data-Model/blob/main/tests/ARCBaseModel.Native/javascript.mjs)
+- [Python consumer](https://github.com/HLWeil/ARC-Data-Model/blob/main/tests/ARCBaseModel.Native/python.py)
+- [TypeScript consumer](https://github.com/HLWeil/ARC-Data-Model/blob/main/tests/ARCBaseModel.Native/consumer.ts)
 
-`TestBaseModelNative` exercises these consumers against the staged packages.
+`TestBaseModelNative` exercises these consumers against staged and locally packed
+npm/Python packages.
 They cover construction, mutation, absence, collections, every alternative,
 reference identity, and a transpiled F# mapping probe. The probe maps alternatives
 to separate SQL-shaped columns and back, proving that native-created values can
@@ -159,8 +159,7 @@ for native numeric pattern matching.
 Layer 1 never requires, generates, or infers an entity's optional `Id`.
 Dataset's required `Identifiers` collection is a separate property. Graph
 indexes, registration, deduplication, normalization, codecs, storage, and
-filesystem or network operations remain outside this library. Existing
-ProcessCore consumers keep their current implementation.
+filesystem or network operations remain outside this library.
 
 SQLite is one possible Layer 2 implementation. It may require or assign domain
 IDs and use them for keys, relationships, and identity resolution. That

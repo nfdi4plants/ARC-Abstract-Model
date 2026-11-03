@@ -4,8 +4,6 @@ open Fake.Core
 open Helpers
 let project = "ARC-base-model"
 
-let testProject = "tests/ProcessCore.Tests"
-
 let solutionFile = $"{project}.sln"
 
 let configuration = "Release"

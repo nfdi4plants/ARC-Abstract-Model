@@ -146,7 +146,6 @@ let clean =
         ++ "tests/**/bin"
         ++ "tests/**/obj"
         ++ "dist"
-        ++ "tests/ProcessCore.Tests/TestResults/"
         |> Shell.cleanDirs
     }
 
@@ -168,12 +167,3 @@ let buildSolution =
                 MSBuildParams = { p.MSBuildParams with DisableInternalBinLog = true } }
             |> DotNet.Options.withCustomParams (Some "-tl"))
     }
-
-
-let transpileTS = BuildTask.create "TranspileTS" [clean] {
-    run dotnet $"fable ./src/ProcessCore/ProcessCore.Javascript.fsproj --lang ts --fableLib @fable-org/fable-library-js --noCache -o src/ProcessCore/ts" ""
-}
-
-let transpilePy = BuildTask.create "TranspilePy" [clean] {
-    run dotnet $"fable ./src/ProcessCore/ProcessCore.Python.fsproj --lang python --noCache -o src/ProcessCore/py" ""
-}

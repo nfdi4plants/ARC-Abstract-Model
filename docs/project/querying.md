@@ -7,6 +7,10 @@ index: 7
 
 # Querying
 
+This page describes query use cases for future operational layers. ARCBaseModel
+Layer 1 stores the entities and relationships; it does not provide traversal,
+path queries, back-edge maintenance, or fragment selector providers.
+
 ## Process list is an emerging graph:
 
 - Process objects contain inputs and outputs. These relationships form a directed graph, where nodes represent these input and output entities and edges represent the processes connecting them.
@@ -31,9 +35,9 @@ graph LR
 
 ## Types and operations
 
-In addition to the core entities defined in the core specification and their properties, the implementation exposes an additional type: **Path**
+An operational query layer could expose a **Path** containing a sequence of processes connected through shared input and output entities.
 
-This type contains a collection of processes connected through their shared nodes (input and output entities). Query operations live on the owning model types in `src/ProcessCore/Graph.fs`: node-centered traversal on `IONode`/`Sample`/`Data`, and dataset-scoped convenience queries on `Dataset`.
+Such a layer would own node-centered traversal and dataset-scoped convenience queries. These operations are outside the current domain API.
 
 I.e. if we ask for a path of a specific sample, we want to get all paths (i.e. distinct sequences of processes) that lead through this sample (including it being the start or end of the path).
 
@@ -64,12 +68,12 @@ I.e. if we ask for a path of a specific sample, we want to get all paths (i.e. d
 - Data analysis: Give me the file fragments for data entities matching process metadata and Datamap semantics.
     - Technical formulation: Filter final `Data` nodes by upstream `Annotation` values, then find `DataContext` entries whose semantic explication matches the data variable of interest and whose target data selector covers the selected `Data` fragment.
     - CommandChain:
-        - Register a fragment selector provider such as `CsvFragmentSelectorProvider`
-        - Use `UpstreamAnnotationsForNode` and `Annotation.NameEquals` to filter data by process-derived metadata
-        - Use `DataContextsForPath`, `DataContextsCoveringData`, and `DataContext.ExplicationEquals` to find the relevant Datamap entries
+        - Interpret file fragments using the declared selector format
+        - Collect upstream annotations to filter data by process-derived metadata
+        - Match semantic descriptors and fragment coverage to find the relevant Datamap entries
         - Pass the resulting file path and selectors to a dataframe or plotting library outside ARC Core
 
-See [Using DataContext](../core-implementation/data-contexts.fsx) for an executable walkthrough.
+The [Layer 1 guide](base-model.md) describes the available domain API and its boundaries.
 
 
 
@@ -79,7 +83,7 @@ See [Using DataContext](../core-implementation/data-contexts.fsx) for an executa
 
 - We need to consider how to efficiently query across potentially large datasets and complex relationships between entities.
 - This might involve indexing certain fields, optimizing the structure of the data for common query patterns, or using a graph database that can handle complex relationships more efficiently.
-- Especially traversing the process graph requires efficient retrieval of how input and output entities are connected, which can be computationally intensive if not optimized properly. (e.g. each input and output entity should know which process it's the input or output of, to avoid having to search through all processes to find these relationships).
+- Traversing the process graph requires efficient retrieval of how input and output entities are connected. An operational layer can build indexes for these relationships without adding back-edge maintenance to the domain model.
 
 ### Queries should be flexible and composable:
 

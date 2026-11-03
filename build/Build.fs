@@ -26,6 +26,8 @@ let _release =
 
 let _docs = [buildDocs; watchDocs] |> ignore
 
+let _runtimeTests = [runTestsDotnet; runTestsJs; runTestsPy] |> ignore
+
 let _baseModel = [BaseModelTasks.buildBaseModel; BaseModelTasks.testBaseModel] |> ignore
 
 let _polyglotSQLite = [PolyglotSQLiteTasks.buildPolyglotSQLite; PolyglotSQLiteTasks.testPolyglotSQLite] |> ignore

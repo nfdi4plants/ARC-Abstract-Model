@@ -22,7 +22,6 @@ libraries for working across .NET, JavaScript, and Python runtimes.
 - [Implementation guide](project/implementation.md)
 - [ARCBaseModel Layer 1 guide](project/base-model.md)
 - [PolyglotSQLite guide](project/polyglot-sqlite.md)
-- [ProcessCore implementation guide](core-implementation/overview.md)
 - [Examples and schemas](project/examples-and-schemas.md)
 - [Reference material](project/references.md)
 - [Prior art notes](project/prior-art.md)

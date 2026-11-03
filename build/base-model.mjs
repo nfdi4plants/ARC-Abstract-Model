@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { spawnSync } from "node:child_process";
 import ts from "typescript";
 import { build as viteBuild } from "vite";
 
@@ -220,24 +221,12 @@ async function stage(includeTests) {
   }
 
   await viteBuild({
-    configFile: false,
-    root: repository,
-    publicDir: false,
+    configFile: path.join(repository, "vite.config.mts"),
+    mode: "arc-base-model",
     plugins: [sameRuntimePlugin()],
     build: {
-      outDir: javascript,
-      emptyOutDir: true,
-      minify: false,
-      sourcemap: true,
-      target: "es2022",
       rollupOptions: {
         input: entries,
-        preserveEntrySignatures: "strict",
-        output: {
-          format: "es",
-          entryFileNames: "[name].js",
-          chunkFileNames: "node_modules/arc-base-model/chunks/[name]-[hash].js",
-        },
       },
     },
   });
@@ -259,6 +248,33 @@ async function stage(includeTests) {
   console.log(`Staged ARCBaseModel JavaScript and checked declarations${includeTests ? ", shared tests, and mapping probe" : ""}.`);
 }
 
+function packTest() {
+  const packed = path.resolve(output, "packed-js");
+  if (!packed.startsWith(output + path.sep)) throw new Error(`Refusing to clean outside ${output}`);
+  fs.rmSync(packed, { recursive: true, force: true });
+  const tarballs = path.join(packed, "tarballs");
+  fs.mkdirSync(tarballs, { recursive: true });
+  const run = (executable, args, cwd = repository) => {
+    const result = spawnSync(executable, args, { cwd, stdio: "inherit" });
+    if (result.error) throw result.error;
+    if (result.status !== 0) throw new Error(`${executable} failed with exit code ${result.status}`);
+  };
+  const args = ["pack", "--ignore-scripts", "--pack-destination", tarballs];
+  if (process.platform === "win32") run("cmd.exe", ["/d", "/c", "npm", ...args], modelPackage);
+  else run("npm", args, modelPackage);
+  const archives = fs.readdirSync(tarballs).filter(name => name.endsWith(".tgz"));
+  if (archives.length !== 1) throw new Error("Expected exactly one local npm package");
+  const installed = path.join(packed, "node_modules/arc-base-model");
+  fs.mkdirSync(installed, { recursive: true });
+  run("tar", ["-xzf", path.join(tarballs, archives[0]), "--strip-components=1", "-C", installed]);
+  fs.cpSync(probePackage, path.join(packed, "node_modules/arc-base-model-probe"), { recursive: true });
+  fs.cpSync(path.join(javascript, "consumer"), path.join(packed, "consumer"), { recursive: true });
+  write(path.join(packed, "package.json"), '{"private":true,"type":"module"}\n');
+  checkTypes([path.join(packed, "consumer/consumer.ts")]);
+  run(process.execPath, [path.join(packed, "consumer/javascript.mjs")]);
+  console.log("ARCBaseModel native consumers passed against the locally packed npm artifact.");
+}
+
 const command = process.argv[2];
 if (command === "build") {
   await stage(false);
@@ -269,6 +285,8 @@ if (command === "build") {
   assertExists(consumer);
   checkTypes([consumer]);
   console.log("ARCBaseModel native TypeScript consumer passed strict checking.");
+} else if (command === "pack-test") {
+  packTest();
 } else {
-  throw new Error("Usage: node build/base-model.mjs build|tests|typecheck");
+  throw new Error("Usage: node build/base-model.mjs build|tests|typecheck|pack-test");
 }

@@ -1,5 +1,5 @@
 version = 1
-revision = 3
+revision = 5
 requires-python = ">=3.11"
 
 [[package]]
@@ -8,23 +8,10 @@ version = "0.0.0"
 source = { virtual = "." }
 dependencies = [
     { name = "fable-library" },
-    { name = "openpyxl" },
 ]
 
 [package.metadata]
-requires-dist = [
-    { name = "fable-library", specifier = "==5.6.0" },
-    { name = "openpyxl", specifier = ">=3.1.5,<4" },
-]
-
-[[package]]
-name = "et-xmlfile"
-version = "2.0.0"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/d3/38/af70d7ab1ae9d4da450eeec1fa3918940a5fafb9055e934af8d6eb0c2313/et_xmlfile-2.0.0.tar.gz", hash = "sha256:dab3f4764309081ce75662649be815c4c9081e88f0837825f90fd28317d4da54", size = 17234, upload-time = "2024-10-25T17:25:40.039Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/c1/8b/5fe2cc11fee489817272089c4203e679c63b570a5aaeb18d852ae3cbba6a/et_xmlfile-2.0.0-py3-none-any.whl", hash = "sha256:7a91720bc756843502c3b7504c77b8fe44217c85c537d85037f0f536151b2caa", size = 18059, upload-time = "2024-10-25T17:25:39.051Z" },
-]
+requires-dist = [{ name = "fable-library", specifier = "==5.6.0" }]
 
 [[package]]
 name = "fable-library"
@@ -109,16 +96,4 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/1f/ca/d7a12d168a27e9d141d702437ca4f5c0a030ba2826f4b0363f5efac231f2/fable_library-5.6.0-pp311-pypy311_pp73-musllinux_1_2_armv7l.whl", hash = "sha256:ccec0f9aa5d73914fbf92585bf5d5c94dddceedd22ec6e40a4ce57433b276a4f", size = 1998157, upload-time = "2026-07-05T12:45:23.217Z" },
     { url = "https://files.pythonhosted.org/packages/1e/7b/1acefbd90ce193ea377a54d9b5f079527cf3ecfe5fd685492318896ef010/fable_library-5.6.0-pp311-pypy311_pp73-musllinux_1_2_i686.whl", hash = "sha256:e6c1540d6abe7457c171d3bb0d02c2bc0dd17189cf2eb9ffc310413118fe6bfe", size = 2026647, upload-time = "2026-07-05T12:45:25.315Z" },
     { url = "https://files.pythonhosted.org/packages/98/90/ebc2d28c1a237e998f4aded0a01e8e40d373539b11fc7cf7f5a1be1baa5b/fable_library-5.6.0-pp311-pypy311_pp73-musllinux_1_2_x86_64.whl", hash = "sha256:035c42d43d3f13e7687d3e3ff28922cd1d9521180f7ea22d5f7bddce9b8d6671", size = 2034805, upload-time = "2026-07-05T12:45:27.014Z" },
-]
-
-[[package]]
-name = "openpyxl"
-version = "3.1.5"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "et-xmlfile" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/3d/f9/88d94a75de065ea32619465d2f77b29a0469500e99012523b91cc4141cd1/openpyxl-3.1.5.tar.gz", hash = "sha256:cf0e3cf56142039133628b5acffe8ef0c12bc902d2aadd3e0fe5878dc08d1050", size = 186464, upload-time = "2024-06-28T14:03:44.161Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/c0/da/977ded879c29cbd04de313843e76868e6e13408a94ed6b987245dc7c8506/openpyxl-3.1.5-py2.py3-none-any.whl", hash = "sha256:5282c12b107bffeef825f4617dc029afaf41d0ea60823bbb665ef3079dc79de2", size = 250910, upload-time = "2024-06-28T14:03:41.161Z" },
 ]

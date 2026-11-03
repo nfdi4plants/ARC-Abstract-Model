@@ -7,9 +7,6 @@ Planned project-file location: `.arc/project.yml`
 Target specification:
 [`docs/spec/project_file.md`](../docs/spec/project_file.md)
 
-Project-file handling plan:
-[`plans/project_file_handling.md`](project_file_handling.md)
-
 ## 1. Summary
 
 The project file maps ARC `Dataset` values to registered bidirectional codecs at

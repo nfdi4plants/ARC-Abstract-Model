@@ -9,17 +9,14 @@ from __future__ import annotations
 
 import argparse
 import ast
-import base64
-import csv
-import hashlib
-import io
 import os
 from pathlib import Path
 import shutil
 import subprocess
 import sys
-import tomllib
 import zipfile
+
+from native_wheel import pack_wheel
 
 
 REPOSITORY = Path(__file__).resolve().parent.parent
@@ -234,25 +231,8 @@ def pack_test(package_root: Path) -> None:
     package_root = package_root.resolve(strict=True)
     packed = OUTPUT / "packed-python"
     clean_generated(packed)
-    wheel = packed / "polyglot_sqlite-0.0.0-py3-none-any.whl"
-    dist_info = "polyglot_sqlite-0.0.0.dist-info"
-    dependency = next(value for value in tomllib.loads((REPOSITORY / "pyproject.toml").read_text(encoding="utf-8"))["project"]["dependencies"] if value.startswith("fable-library=="))
-    files = {}
-    for filename in (package_root / "polyglot_sqlite").rglob("*"):
-        if filename.is_file() and "__pycache__" not in filename.parts:
-            files[filename.relative_to(package_root).as_posix()] = filename.read_bytes()
-    files[f"{dist_info}/METADATA"] = ("Metadata-Version: 2.3\nName: polyglot-sqlite\nVersion: 0.0.0\nRequires-Python: >=3.12\n" + f"Requires-Dist: {dependency}\n").encode()
-    files[f"{dist_info}/WHEEL"] = b"Wheel-Version: 1.0\nGenerator: PolyglotSQLite local verification\nRoot-Is-Purelib: true\nTag: py3-none-any\n"
-    records = io.StringIO(newline="")
-    writer = csv.writer(records)
-    for filename, data in files.items():
-        digest = base64.urlsafe_b64encode(hashlib.sha256(data).digest()).rstrip(b"=").decode()
-        writer.writerow([filename, "sha256=" + digest, len(data)])
-    writer.writerow([f"{dist_info}/RECORD", "", ""])
-    files[f"{dist_info}/RECORD"] = records.getvalue().encode()
-    with zipfile.ZipFile(wheel, "w", zipfile.ZIP_DEFLATED) as archive:
-        for filename, data in files.items():
-            archive.writestr(filename, data)
+    wheel = pack_wheel(package_root, "polyglot_sqlite", "polyglot-sqlite", packed,
+                       requires_python=">=3.12")
     installed = packed / "installed"
     with zipfile.ZipFile(wheel) as archive:
         archive.extractall(installed)

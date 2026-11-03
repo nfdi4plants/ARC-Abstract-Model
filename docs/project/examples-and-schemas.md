@@ -14,7 +14,7 @@ Schemas are derived representations of the markdown specification. The markdown 
 | Location | Status |
 |----------|--------|
 | `schemas/sql/` | SQLite-oriented SQL profile with executable DDL and seed data |
-| `schemas/yml/` | JSON Schema draft 2020-12 expressed in YAML for the unified ProcessCore model |
+| `schemas/yml/` | JSON Schema draft 2020-12 expressed in YAML for the ARC data model |
 | `schemas/document-db/` | Placeholder for a future document database representation |
 
 The YAML schemas describe the current unified vocabulary. In particular, `Process.yml` expects `inputs`, `outputs`, and `executesRecipe`; dataset metadata uses repo-native fields such as `agents`, `citations`, `dataFiles`, and `dataContexts`.

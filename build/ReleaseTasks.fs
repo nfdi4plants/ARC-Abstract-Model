@@ -41,20 +41,21 @@ let publishNuget = BuildTask.create "PublishNuget" [clean; buildSolution; runTes
 
 
 let publishNPM = BuildTask.create "PublishNPM" [clean; buildSolution; runTests; packJS] {
-    let target = 
+    let targets =
         (!! (sprintf "%s/*.tgz" npmPkgDir ))
-        |> Seq.head
-    printfn "%A" target
+        |> Seq.toArray
+    for target in targets do printfn "%A" target
     let tag = versionController.NPMTag
     let msg = sprintf "[NPM] release package with version %s?" tag 
     if promptYesNo msg then
         let apikey =  Environment.environVarOrNone "NPM_KEY"    
         let otp = if apikey.IsSome then $" --otp {apikey.Value}" else ""
         let tag = if versionController.IsPrerelease then $" --tag next" else ""
-        Fake.JavaScript.Npm.exec $"publish {target} --access public {tag}{otp}" (fun o ->
-            { o with
-                WorkingDirectory = "./dist/ts/"
-            })      
+        for target in targets do
+            Fake.JavaScript.Npm.exec $"publish {target} --access public {tag}{otp}" (fun o ->
+                { o with
+                    WorkingDirectory = "./dist/ts/"
+                })
     else failwith "aborted"
 }
 

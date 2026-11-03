@@ -3,6 +3,7 @@
 Usage: python build/base-model-python.py GENERATED_DIR PACKAGE_OUTPUT_DIR
        python build/base-model-python.py tests GENERATED_TEST_DIR PACKAGE_ROOT
        python build/base-model-python.py compat GENERATED_DIR
+       python build/base-model-python.py pack-test PACKAGE_ROOT
 
 Fable 5 emits erased unions as Any in Python. Public stubs retain the emitted
 constructor and property shapes while restoring the four domain alternatives.
@@ -19,9 +20,14 @@ from __future__ import annotations
 
 import argparse
 import ast
+import os
 from pathlib import Path
 import shutil
+import subprocess
 import sys
+import zipfile
+
+from native_wheel import pack_wheel
 
 
 MODULE_CLASSES = {
@@ -472,7 +478,35 @@ def stage_tests(source: Path, package_root: Path) -> None:
     print(f"Staged test-only mapping consumer with shared model imports at {destination}")
 
 
+def pack_test(package_root: Path) -> None:
+    repository = Path(__file__).resolve().parent.parent
+    output = (repository / "build/out/base-model").resolve()
+    packed = (output / "packed-python").resolve()
+    if not packed.is_relative_to(output) or packed == output:
+        raise ValueError(f"Refusing to clean outside {output}")
+    if packed.exists():
+        shutil.rmtree(packed)
+    packed.mkdir(parents=True)
+    wheel = pack_wheel(package_root, "arc_base_model", "arc-base-model", packed)
+    installed = packed / "installed"
+    with zipfile.ZipFile(wheel) as archive:
+        archive.extractall(installed)
+    shutil.copytree(package_root / "arc_base_model_probe", installed / "arc_base_model_probe",
+                    ignore=shutil.ignore_patterns("__pycache__"))
+    for filename in installed.rglob("*.pyi"):
+        validate_stub(filename.read_text(encoding="utf-8"), str(filename))
+    subprocess.run([sys.executable, str(repository / "tests/ARCBaseModel.Native/python.py")],
+                   check=True, env=dict(os.environ, PYTHONPATH=str(installed)))
+    print(f"ARCBaseModel native consumer passed against the locally packed wheel: {wheel}")
+
+
 def main() -> None:
+    if sys.argv[1:2] == ["pack-test"]:
+        parser = argparse.ArgumentParser(description="Verify native consumers against a local wheel")
+        parser.add_argument("package_root", type=Path)
+        arguments = parser.parse_args(sys.argv[2:])
+        pack_test(arguments.package_root)
+        return
     if sys.argv[1:2] == ["compat"]:
         parser = argparse.ArgumentParser(description="Adapt generated Fable 5.6 Python numeric boundaries")
         parser.add_argument("generated_dir", type=Path)

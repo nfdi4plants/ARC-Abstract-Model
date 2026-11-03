@@ -22,8 +22,6 @@ The `references/` directory preserves upstream specifications and previous imple
 
 | Location | Purpose |
 |----------|---------|
-| `references/ProcessCore/` | Previous ARCtrl QueryModel ProcessCore source files and summary |
-| `references/Tabular/` | Tabular API/type notes |
-| `references/TabularAndProcessConversion.md` | Bidirectional table/process mapping notes |
+| `references/YAMLParser/` | Preserved upstream ARCtrl YAML parser source |
 
 Use these files when comparing against existing ARC ecosystem behavior. Use [docs/spec](../spec/index.md) and `schemas/` for current project decisions.

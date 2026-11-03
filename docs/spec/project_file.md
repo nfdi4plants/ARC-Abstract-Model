@@ -22,9 +22,8 @@ The key words **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**, **SHALL NOT**,
 [BCP 14](https://www.rfc-editor.org/info/bcp14) when, and only when, they appear
 in all capitals.
 
-The non-normative design and implementation plans are
-[`plans/project_file.md`](../../plans/project_file.md) and
-[`plans/project_file_handling.md`](../../plans/project_file_handling.md).
+The non-normative language design plan is
+[`plans/project_file.md`](../../plans/project_file.md).
 
 ## 1. Model
 

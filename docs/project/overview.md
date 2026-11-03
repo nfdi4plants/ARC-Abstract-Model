@@ -7,7 +7,7 @@ index: 1
 
 # Project Overview
 
-ARC Data Model is the workspace for the unified ARC RDM data model. It contains the markdown specification, derived schemas, example documents, reference material from upstream ARC/RO-Crate work, and F# implementation projects for ProcessCore and the SQL profile.
+ARC Data Model is the workspace for the unified ARC RDM data model. It contains the markdown specification, derived schemas, example documents, reference material from upstream ARC/RO-Crate work, and the portable ARCBaseModel and PolyglotSQLite F# libraries.
 
 ## Repository Shape
 
