@@ -39,3 +39,9 @@ A Dataset's `hasParts` collection MAY contain Datasets from any base profile, in
 - Unified: Process Provenance, Semantic Designation, and Administrative properties are available on shared model types rather than split into separate runtime objects.
 - Extensible: `Annotation` and `additionalTypes` carry domain-specific information while typed properties cover the common profile surface.
 - Representation-aware but model-first: SQL and YAML schemas derive from the markdown spec.
+
+## Workspace definition draft
+
+The [ARC Workspace Definition draft](workspace/workspace-definition.md) proposes bindings
+from model properties to workspace files, placement validation, and generation of
+static publication artifacts. It is a design draft with explicitly open decisions.
