@@ -2,13 +2,13 @@ module ProjectInfo
 
 open Fake.Core
 open Helpers
-let project = "ARC-base-model"
+let project = "ARC-Abstract-Model"
 
 let solutionFile = $"{project}.sln"
 
 let configuration = "Release"
 
-let gitOwner = "HLWeil"
+let gitOwner = "nfdi4plants"
 
 let gitHome = $"https://github.com/{gitOwner}"
 
