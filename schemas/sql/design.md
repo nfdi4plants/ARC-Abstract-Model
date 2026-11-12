@@ -1,6 +1,6 @@
 # Core SQL Import Profile
 
-A SQLite import profile for the [Process Provenance model](../../docs/spec/process_provenance/overview.md). Scope: core entities only. ISA, Workflow Run, and Datamap decorations can layer on top later through `additional_type` and decoration-owned tables.
+A SQLite import profile for the [Process Provenance model](../../docs/spec/provenance_core/overview.md). Scope: core entities only. ISA, Workflow Run, and Datamap decorations can layer on top later through `additional_type` and decoration-owned tables.
 
 The Markdown files in `docs/spec/core/` remain authoritative. This SQL import profile round-trips YAML documents that conform to it. The profile narrows the open YAML surface where SQL needs a concrete contract: no orphan Annotations at commit time, exact-one-target foreign keys for mixed-target lists, deterministic generated IDs for fragment-level Data, and unresolved references as import errors except for `intendedUse` free text.
 

@@ -1,11 +1,11 @@
 ---
-title: Semantic Designation Profile
-category: Semantic Designation Profile
+title: Semantic Core
+category: Semantic Core
 categoryindex: 5
 index: 1
 ---
 
-# Semantic Designation Profile
+# Semantic Core
 
 This profile defines a consistent approach for describing semantic metadata associated with entities represented in an ARC. These entities may be data entities, such as directories, files, or fragments of files, as well as contextual entities, such as physical samples, instruments, or other real-world objects represented in the ARC.
 

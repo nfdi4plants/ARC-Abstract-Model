@@ -1,41 +1,41 @@
 ---
-title: Base Profiles
+title: Abstract Model Profiles
 category: Specification
 categoryindex: 3
 index: 1
 ---
 
-# Base Profiles
+# Abstract Model Profiles
 
-The ARC Data Model specification defines three base profiles that together form the general ARC RDM model: Process Provenance, Semantic Designation, and Administrative. The implementation uses one unified object model; the base profiles describe coherent subsets of the same model surface.
+The ARC Abstract Model specification defines three profiles that together form the general ARC RDM model: Provenance Core, Semantic Core, and Administrative Core. The implementation uses one unified object model; the Abstract Model profiles describe coherent subsets of the same model surface.
 
-Entity specifications shared unchanged between base profiles live in `shared/`: [Data](shared/Data.md), [Sample](shared/Sample.md), [Annotation](shared/Annotation.md), [FormalParameter](shared/FormalParameter.md), [DefinedTerm](shared/DefinedTerm.md), and [DefinedTermSet](shared/DefinedTermSet.md). Entities whose fields differ between profiles retain their full tables in each profile folder.
+Entity specifications shared unchanged between Abstract Model profiles live in `shared/`: [Data](shared/Data.md), [Sample](shared/Sample.md), [Annotation](shared/Annotation.md), [FormalParameter](shared/FormalParameter.md), [DefinedTerm](shared/DefinedTerm.md), and [DefinedTermSet](shared/DefinedTermSet.md). Entities whose fields differ between profiles retain their full tables in each profile folder.
 
 ## Reading Order
 
-1. [Process Provenance](process_provenance/overview.md)
-2. [Semantic Designation](semantic_designation/overview.md)
-3. [Administrative](administrative/overview.md)
+1. [Provenance Core](provenance_core/overview.md)
+2. [Semantic Core](semantic_core/overview.md)
+3. [Administrative Core](administrative_core/overview.md)
 
 ## Profile Discriminators
 
-Datasets MUST declare their base profiles in `conformsTo` using the corresponding case-sensitive discriminator:
+Datasets MUST declare their Abstract Model profiles in `conformsTo` using the corresponding case-sensitive discriminator:
 
-| Base profile | Discriminator |
+| Abstract Model profile | Discriminator |
 |--------------|---------------|
-| [Administrative](administrative/overview.md) | `administrative` |
-| [Semantic Designation](semantic_designation/overview.md) | `semantic-designation` |
-| [Process Provenance](process_provenance/overview.md) | `process-provenance` |
+| [Administrative Core](administrative_core/overview.md) | `administrative-core` |
+| [Semantic Core](semantic_core/overview.md) | `semantic-core` |
+| [Provenance Core](provenance_core/overview.md) | `provenance-core` |
 
-Other classifications or specializations MAY also be present in `conformsTo`. The `type` field identifies the entity type; the base-profile discriminator identifies the applicable profile-specific specification.
+Other classifications or specializations MAY also be present in `conformsTo`. The `type` field identifies the entity type; the Abstract Model profile discriminator identifies the applicable profile-specific specification.
 
 ### Dataset Nesting
 
-A Dataset's `hasParts` collection MAY contain Datasets from any base profile, including different profiles within the same collection. Each child MUST declare its own discriminator and follow the corresponding [Administrative Dataset](administrative/Dataset.md), [Process Provenance Dataset](process_provenance/Dataset.md), or [Semantic Designation Dataset](semantic_designation/Dataset.md) specification. A child's profile is independent of its parent's and siblings' profiles. These nesting options apply recursively to every child's `hasParts`.
+A Dataset's `hasParts` collection MAY contain Datasets from any Abstract Model profile, including different profiles within the same collection. Each child MUST declare its own discriminator and follow the corresponding [Administrative Core Dataset](administrative_core/Dataset.md), [Provenance Core Dataset](provenance_core/Dataset.md), or [Semantic Core Dataset](semantic_core/Dataset.md) specification. A child's profile is independent of its parent's and siblings' profiles. These nesting options apply recursively to every child's `hasParts`.
 
 ## Principles
 
 - Process-centric: experiments and workflows are modeled as processes connecting inputs to outputs.
-- Unified: Process Provenance, Semantic Designation, and Administrative properties are available on shared model types rather than split into separate runtime objects.
+- Unified: Provenance Core, Semantic Core, and Administrative Core properties are available on shared model types rather than split into separate runtime objects.
 - Extensible: `Annotation` and `additionalTypes` carry domain-specific information while typed properties cover the common profile surface.
 - Representation-aware but model-first: SQL and YAML schemas derive from the markdown spec.

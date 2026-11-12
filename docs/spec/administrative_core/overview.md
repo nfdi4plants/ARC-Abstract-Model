@@ -1,13 +1,13 @@
 ---
-title: Administrative
-category: Administrative Profile
+title: Administrative Core
+category: Administrative Core
 categoryindex: 6
 index: 1
 ---
 
-# Administrative
+# Administrative Core
 
-The Administrative profile describes dataset-level administrative provenance: identifying metadata, agents and contributors, affiliations, citations, rights information, and lifecycle dates.
+Administrative Core describes dataset-level administrative provenance: identifying metadata, agents and contributors, affiliations, citations, rights information, and lifecycle dates.
 
 ## Entity Specifications
 

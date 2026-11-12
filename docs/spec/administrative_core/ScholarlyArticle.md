@@ -1,6 +1,6 @@
 ---
 title: ScholarlyArticle
-category: Administrative Profile
+category: Administrative Core
 categoryindex: 6
 index: 5
 ---
@@ -20,7 +20,7 @@ A scholarly publication associated with a Dataset. This can be used to link to p
 | `identifiers` | Text | `0..*` | SHOULD | Identifiers by which the article is known or referenced, such as a DOI, PubMed ID, or repository identifier. Identifiers may be globally scoped or scoped to a particular system or context. |
 | `authors` | [Agent](Agent.md) | `0..*` | SHOULD | Agents credited as authors of the article. These may be people or agentic software systems. |
 | `creativeWorkStatus` | [DefinedTerm](../shared/DefinedTerm.md) | `0..1` | MAY | Stage of the article in its publication lifecycle, such as Draft or Published. |
-| `additionalProperties` | [Annotation](../shared/Annotation.md) | `0..*` | MAY | Extensible article metadata not covered by the base properties. |
+| `additionalProperties` | [Annotation](../shared/Annotation.md) | `0..*` | MAY | Extensible article metadata not covered by the Abstract Model properties. |
 
 ## Relationships
 

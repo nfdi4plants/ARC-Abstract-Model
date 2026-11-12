@@ -7,9 +7,9 @@ index: 2
 
 # Specification Guide
 
-The normative specification lives in [docs/spec](../spec/index.md). The repository organizes the ARC RDM model into three base profiles: Process Provenance, Semantic Designation, and Administrative. Decoration profiles, including Datamap, add domain-specific refinements. The implementation remains one shared model; profile boundaries are documentation and mapping boundaries, not runtime type boundaries.
+The normative specification lives in [docs/spec](../spec/index.md). The repository organizes the ARC Abstract Model into three profiles: Provenance Core, Semantic Core, and Administrative Core. Decoration profiles, including Datamap, add domain-specific refinements. The implementation remains one shared model; profile boundaries are documentation and mapping boundaries, not runtime type boundaries.
 
-## Base Profiles
+## Abstract Model Profiles
 
 ```mermaid
 flowchart LR
@@ -37,27 +37,27 @@ Shared model entities:
 
 | Entity | Source |
 |--------|--------|
-| Dataset | [Process Provenance](../spec/process_provenance/Dataset.md), [Semantic Designation](../spec/semantic_designation/Dataset.md), [Administrative](../spec/administrative/Dataset.md) |
-| Process | [Process](../spec/process_provenance/Process.md) |
-| Recipe | [Recipe](../spec/process_provenance/Recipe.md) |
+| Dataset | [Provenance Core](../spec/provenance_core/Dataset.md), [Semantic Core](../spec/semantic_core/Dataset.md), [Administrative Core](../spec/administrative_core/Dataset.md) |
+| Process | [Process](../spec/provenance_core/Process.md) |
+| Recipe | [Recipe](../spec/provenance_core/Recipe.md) |
 | Sample | [Sample](../spec/shared/Sample.md) |
 | Data | [Data](../spec/shared/Data.md) |
-| Descriptor | [Descriptor](../spec/semantic_designation/Descriptor.md) |
+| Descriptor | [Descriptor](../spec/semantic_core/Descriptor.md) |
 | Annotation | [Annotation](../spec/shared/Annotation.md) |
 | FormalParameter | [FormalParameter](../spec/shared/FormalParameter.md) |
 | DefinedTerm | [DefinedTerm](../spec/shared/DefinedTerm.md) |
 | DefinedTermSet | [DefinedTermSet](../spec/shared/DefinedTermSet.md) |
-| Agent | [Agent](../spec/administrative/Agent.md) |
-| Organization | [Organization](../spec/administrative/Organization.md) |
-| ScholarlyArticle | [ScholarlyArticle](../spec/administrative/ScholarlyArticle.md) |
+| Agent | [Agent](../spec/administrative_core/Agent.md) |
+| Organization | [Organization](../spec/administrative_core/Organization.md) |
+| ScholarlyArticle | [ScholarlyArticle](../spec/administrative_core/ScholarlyArticle.md) |
 
-Base profile entry points:
+Abstract Model profile entry points:
 
-| Base Profile | Purpose | Source |
+| Abstract Model Profile | Purpose | Source |
 |--------------|---------|--------|
-| Process Provenance | Provenance through datasets, processes, protocols, samples, data, and annotations | [Process Provenance](../spec/process_provenance/overview.md) |
-| Semantic Designation | Semantic descriptions that connect datasets, samples, and data with bundled annotations | [Semantic Designation](../spec/semantic_designation/overview.md) |
-| Administrative | Dataset metadata, agents, affiliations, citations, licenses, and dates | [Administrative](../spec/administrative/overview.md) |
+| Provenance Core | Provenance through datasets, processes, protocols, samples, data, and annotations | [Provenance Core](../spec/provenance_core/overview.md) |
+| Semantic Core | Semantic descriptions that connect datasets, samples, and data with bundled annotations | [Semantic Core](../spec/semantic_core/overview.md) |
+| Administrative Core | Dataset metadata, agents, affiliations, citations, licenses, and dates | [Administrative Core](../spec/administrative_core/overview.md) |
 
 ## Decorations
 
@@ -71,9 +71,9 @@ Decorations add domain-specific meaning through `additionalType`, specialized pr
 
 ## Naming Notes
 
-The Process Provenance vocabulary uses `Process` and `Recipe`, not the older placeholder names `Process` and `Protocol`.
+The Provenance Core vocabulary uses `Process` and `Recipe`, not the older placeholder names `Process` and `Protocol`.
 
-For process I/O, the current core and YAML schema names are:
+For process I/O, the current ARC Abstract Model and YAML schema names are:
 
 - `inputs`
 - `outputs`

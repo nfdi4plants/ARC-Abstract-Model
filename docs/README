@@ -3,7 +3,7 @@
 This file is named `README` so fsdocs ignores it while it still stays next
 to the documentation source it describes.
 
-This folder is the fsdocs source tree for the ARC Data Model documentation.
+This folder is the fsdocs source tree for the ARC Abstract Model documentation.
 Most pages are ordinary Markdown; literate F# scripts can also be compiled
 and evaluated during `BuildDocs`.
 
@@ -12,10 +12,10 @@ and evaluated during `BuildDocs`.
 - `index.md` is the documentation landing page.
 - `project/` contains user-facing project guides: overview, implementation
   notes, querying background, references, examples, schemas, and prior art.
-- `spec/` contains the normative specification. The three ARC RDM base profiles
-  live under `spec/process_provenance/`, `spec/semantic_designation/`, and
-  `spec/administrative/`. Entity specifications shared unchanged between base
-  profiles live under `spec/shared/`; decoration profiles, including Datamap,
+- `spec/` contains the normative specification. The three ARC Abstract Model
+  profiles live under `spec/provenance_core/`, `spec/semantic_core/`, and
+  `spec/administrative_core/`. Entity specifications shared unchanged between
+  Abstract Model profiles live under `spec/shared/`; decoration profiles, including Datamap,
   live under `spec/decorations/`.
 - `_head.html` is injected into every generated page and is the place for small
   site-wide presentation adapters that cannot be expressed in page frontmatter.
@@ -48,8 +48,8 @@ library usage.
 - YAML highlighting: raw generated YAML blocks marked with `language-yaml` or
   `lang="yaml"` are highlighted in the browser with Highlight.js.
 - Sidebar regrouping: fsdocs emits a flat list of category headers and links.
-  A small DOM transform makes `Project` collapsible, groups the base-profile
-  sections under a synthetic `Profiles` heading, and groups the decoration
+  A small DOM transform makes `Project` collapsible, groups the Abstract Model
+  profile sections under a synthetic `Abstract Model Profiles` heading, and groups the decoration
   sections under a synthetic `Decorations` heading. It also places each
   group's overview/info page first and makes each subsection collapsible. The
   active subsection opens automatically on its own pages. If generated output

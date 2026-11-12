@@ -7,7 +7,7 @@ index: 8
 
 # Prior Art
 
-The ARC Data Model builds on existing ARCtrl representations and query-model work. This page keeps that background separate from the current repository overview.
+The ARC Abstract Model builds on existing ARCtrl representations and query-model work. This page keeps that background separate from the current repository overview.
 
 ## ARCtrl Core Representation
 

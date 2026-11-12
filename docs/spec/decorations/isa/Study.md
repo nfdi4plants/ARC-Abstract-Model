@@ -7,7 +7,7 @@ index: 3
 
 # Study
 
-ISA specialization of [Dataset](../../process_provenance/Dataset.md). Represents a unit of research with associated experimental processes at the study level.
+ISA specialization of [Dataset](../../provenance_core/Dataset.md). Represents a unit of research with associated experimental processes at the study level.
 
 **`additionalType`**: `Study`
 
@@ -19,7 +19,7 @@ Reference: [ISA RO-Crate Profile — Study](../../../../references/isa_ro_crate.
 |----------|------|----------|-------------|
 | `additionalType` | string | MUST | `Study` |
 | `assays` | [Assay](Assay.md) | COULD | Contained assays or data files |
-| `contacts` | [Agent](../../administrative/Agent.md) | COULD | Study contacts and contributors |
+| `contacts` | [Agent](../../administrative_core/Agent.md) | COULD | Study contacts and contributors |
 | `citation` | ScholarlyArticle | COULD | Associated publications |
 
 ## Relationships

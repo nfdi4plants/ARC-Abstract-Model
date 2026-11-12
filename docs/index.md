@@ -1,26 +1,26 @@
 ---
-title: ARC Base Model
+title: ARC Abstract Model
 category: Documentation
 categoryindex: 1
 index: 1
 ---
 
-# ARC Base Model
+# ARC Abstract Model
 
-Specification and implementation workspace for the ARC Base Model. The model is
-organized into three base profiles—Process Provenance, Semantic Designation,
-and Administrative—and domain-specific decoration profiles that extend them.
+Specification and implementation workspace for the ARC Abstract Model. The model is
+organized into three profiles—Provenance Core, Semantic Core,
+and Administrative Core—and domain-specific decoration profiles that extend them.
 The repository also contains derived schema representations, examples, and F#
 libraries for working across .NET, JavaScript, and Python runtimes.
 
 ## Start Here
 
 - [Project overview](project/overview.md)
-- [Base profiles](spec/index.md)
+- [Abstract Model profiles](spec/index.md)
 - [Decoration profiles](spec/decorations/overview.md)
 - [Specification guide](project/specification.md)
 - [Implementation guide](project/implementation.md)
-- [ARCBaseModel Layer 1 guide](project/base-model.md)
+- [ARC Abstract Model Layer 1 guide](project/abstract-model.md)
 - [PolyglotSQLite guide](project/polyglot-sqlite.md)
 - [Examples and schemas](project/examples-and-schemas.md)
 - [Reference material](project/references.md)
@@ -30,21 +30,21 @@ libraries for working across .NET, JavaScript, and Python runtimes.
 
 ```mermaid
 flowchart TB
-    arc[ARC Base Model]
-    base[Base Profiles]
+    arc[ARC Abstract Model]
+    profiles[Abstract Model Profiles]
     decorations[Decoration Profiles]
 
-    arc --> base
+    arc --> profiles
     arc --> decorations
 
-    base --> provenance[Process Provenance]
-    base --> semantics[Semantic Designation]
-    base --> administrative[Administrative]
+    profiles --> provenance[Provenance Core]
+    profiles --> semantics[Semantic Core]
+    profiles --> administrative[Administrative Core]
 
     decorations --> isa[ISA]
     decorations --> workflow[Workflow Run]
     decorations --> datamap[Datamap]
 
-    decorations -. extend .-> base
+    decorations -. extend .-> profiles
 ```
 

@@ -14,7 +14,7 @@ classes and methods directly through the public packages.
 
 The library provides values, parameters, ordered rows, connection ownership,
 transactions, and generic table repositories. A future ARC SQLite implementation
-will combine it with [ARCBaseModel](base-model.md) and define the ARC schema,
+will combine it with [ARCBaseModel](abstract-model.md) and define the ARC schema,
 entity mappings, and ID policies. PolyglotSQLite itself has no ARC dependency.
 ARCBaseModel remains independent of this infrastructure library.
 

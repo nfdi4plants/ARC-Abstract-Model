@@ -7,20 +7,20 @@ index: 3
 
 # Implementation Guide
 
-The repository implements the base specification and portable SQLite infrastructure as independent F# libraries. Both target .NET Standard 2.0 and use the pinned Fable toolchain for JavaScript/TypeScript and Python.
+The repository implements the ARC Abstract Model specification and portable SQLite infrastructure as independent F# libraries. Both target .NET Standard 2.0 and use the pinned Fable toolchain for JavaScript/TypeScript and Python.
 
 ## Projects
 
 | Project | Role | Runtime |
 |---------|------|---------|
-| `src/ARCBaseModel` | Layer 1 domain classes for all three base profiles | .NET, JavaScript, Python |
+| `src/ARCBaseModel` | Layer 1 domain classes for all three Abstract Model profiles | .NET, JavaScript, Python |
 | `src/PolyglotSQLite` | SQLite values, connections, transactions, and generic table repositories | .NET, Node, Python |
 | `tests/ARCBaseModel.Tests` | Shared domain behavior and mapping probe | .NET, JavaScript, Python |
 | `tests/ARCBaseModel.Native` | Handwritten JavaScript, TypeScript, and Python consumers | Node, Python |
 | `tests/PolyglotSQLite.Tests` | Shared SQLite behavior and database interoperability | .NET, Node, Python |
 | `tests/PolyglotSQLite.Native` | Handwritten consumers of staged and locally packed packages | Node, Python |
 
-The [Layer 1 guide](base-model.md) documents construction, alternatives, native packages, and optional IDs. Graph indexes, traversal, normalization, codecs, and persistence belong to operational layers outside this library.
+The [Layer 1 guide](abstract-model.md) documents construction, alternatives, native packages, and optional IDs. Graph indexes, traversal, normalization, codecs, and persistence belong to operational layers outside this library.
 
 The [PolyglotSQLite guide](polyglot-sqlite.md) documents the SQLite API and ownership contract. Providers are Microsoft.Data.Sqlite for .NET, better-sqlite3 for Node, and stdlib sqlite3 for Python. ARC entity mappings, schemas, and ID policies remain outside this infrastructure library.
 

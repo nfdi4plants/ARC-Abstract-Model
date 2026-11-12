@@ -1,18 +1,18 @@
 ---
-title: ARCBaseModel Layer 1
+title: ARC Abstract Model Layer 1
 category: Project
 categoryindex: 2
 index: 8
 ---
 
-# ARCBaseModel Layer 1
+# ARC Abstract Model Layer 1
 
-`ARCBaseModel` implements the [base specification](../spec/index.md) as 13 mutable
+`ARCBaseModel` implements the [ARC Abstract Model specification](../spec/index.md) as 13 mutable
 F# classes targeting .NET Standard 2.0. The same source produces JavaScript with
 TypeScript declarations and an importable Python package. Native callers use
 ordinary constructors, properties, arrays or lists, and primitive values.
 
-One `Dataset` class combines the three base profiles. `ConformsTo` declares one
+One `Dataset` class combines the three Abstract Model profiles. `ConformsTo` declares one
 or more applicable profiles; it does not select a different runtime class.
 Nested datasets declare their own profiles independently of their parent.
 
@@ -65,7 +65,7 @@ let data = Data("measurements.csv")
 let measurement = Process("measure leaf", input = EntityReference.Sample sample,
                           output = EntityReference.Data data)
 let descriptor = Descriptor(EntityReference.Sample sample, annotations = [ temperature ])
-let dataset = Dataset([ "process-provenance"; "semantic-designation" ], [ "example-study" ])
+let dataset = Dataset([ "provenance-core"; "semantic-core" ], [ "example-study" ])
 
 dataset.Processes.Add(measurement)
 dataset.Descriptors.Add(descriptor)
@@ -76,7 +76,7 @@ temperature.Value <- None
 Constructors require the specification's mandatory data: for example, a Sample
 needs a name, Data needs a path, and Descriptor needs a target. Dataset requires
 nonempty `ConformsTo` and `Identifiers` collections, including at least one of
-`administrative`, `process-provenance`, and `semantic-designation`. Additional
+`administrative-core`, `provenance-core`, and `semantic-core`. Additional
 profile strings are allowed. Required strings cannot be null; supplied text is
 not trimmed or normalized.
 
@@ -111,9 +111,9 @@ entity class definitions.
 
 The executable examples are also acceptance tests:
 
-- [JavaScript consumer](https://github.com/HLWeil/ARC-Data-Model/blob/main/tests/ARCBaseModel.Native/javascript.mjs)
-- [Python consumer](https://github.com/HLWeil/ARC-Data-Model/blob/main/tests/ARCBaseModel.Native/python.py)
-- [TypeScript consumer](https://github.com/HLWeil/ARC-Data-Model/blob/main/tests/ARCBaseModel.Native/consumer.ts)
+- [JavaScript consumer](https://github.com/nfdi4plants/ARC-Abstract-Model/blob/main/tests/ARCBaseModel.Native/javascript.mjs)
+- [Python consumer](https://github.com/nfdi4plants/ARC-Abstract-Model/blob/main/tests/ARCBaseModel.Native/python.py)
+- [TypeScript consumer](https://github.com/nfdi4plants/ARC-Abstract-Model/blob/main/tests/ARCBaseModel.Native/consumer.ts)
 
 `TestBaseModelNative` exercises these consumers against staged and locally packed
 npm/Python packages.
@@ -163,7 +163,7 @@ filesystem or network operations remain outside this library.
 
 SQLite is one possible Layer 2 implementation. It may require or assign domain
 IDs and use them for keys, relationships, and identity resolution. That
-implementation owns uniqueness and collision policies; the base model does not
+implementation owns uniqueness and collision policies; the abstract model does not
 require separate SQL surrogate keys. Erased alternatives need explicit mappings
 rather than reflection over union tags, and separately built consumers must
 reuse the same model classes. Layer 1 adds no SQLite schema or driver.

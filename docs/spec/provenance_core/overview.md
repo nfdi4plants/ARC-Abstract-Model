@@ -1,13 +1,13 @@
 ---
-title: Process Provenance Profile
-category: Process Provenance Profile
+title: Provenance Core
+category: Provenance Core
 categoryindex: 4
 index: 1
 ---
 
-# Process Provenance Profile
+# Provenance Core
 
-The Process Provenance Profile describes the fundamental entities and relationships in the ARC process model. It abstracts experimental and computational workflows as process graphs that connect sample and data inputs to sample and data outputs.
+Provenance Core describes the fundamental entities and relationships in the ARC process model. It abstracts experimental and computational workflows as process graphs that connect sample and data inputs to sample and data outputs.
 
 ## Entity Specifications
 

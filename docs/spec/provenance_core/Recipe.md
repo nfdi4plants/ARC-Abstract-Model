@@ -1,6 +1,6 @@
 ---
 title: Recipe
-category: Process Provenance Profile
+category: Provenance Core
 categoryindex: 4
 index: 4
 ---
@@ -20,7 +20,7 @@ Description of a planned procedure. Recipes define what a Process executes, incl
 | `parameters` | [FormalParameter](../shared/FormalParameter.md) | `0..*` | MAY | Prospective parameter slots for values supplied when executing the recipe |
 | `description` | Text | `0..1` | SHOULD | Short description or abstract of the planned procedure |
 | `intendedUse` | [DefinedTerm](../shared/DefinedTerm.md), Text | `0..1` | SHOULD | Recipe classification, expressed as a controlled vocabulary term or plain text |
-| `additionalProperties` | [Annotation](../shared/Annotation.md) | `0..*` | MAY | Extensible recipe metadata not covered by the base properties |
+| `additionalProperties` | [Annotation](../shared/Annotation.md) | `0..*` | MAY | Extensible recipe metadata not covered by the Abstract Model properties |
 | `components` | [Annotation](../shared/Annotation.md) | `0..*` | MAY | Annotations describing equipment, software, reagents, materials, or other components used in the recipe |
 | `version` | Text | `0..1` | MAY | Version identifier of the recipe |
 | `url` | URL | `0..1` | MAY | URL of an external resource describing the recipe |

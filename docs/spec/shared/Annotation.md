@@ -7,9 +7,9 @@ index: 5
 
 # Annotation
 
-An annotation is a key, value, unit triple, represented by `name`, `value`, and `unit`. Each of the three can optionally be associated with an ontology term through `nameTAN`, `valueTAN`, and `unitTAN`, respectively. Annotation is shared by all three base profiles and carries no required base-profile discriminator.
+An annotation is a key, value, unit triple, represented by `name`, `value`, and `unit`. Each of the three can optionally be associated with an ontology term through `nameTAN`, `valueTAN`, and `unitTAN`, respectively. Annotation is shared by all three Abstract Model profiles and carries no required Abstract Model profile discriminator.
 
-Annotations can be attached through `additionalProperties` for cross-cutting metadata, bundled in a [Descriptor](../semantic_designation/Descriptor.md) through `annotations`, or used through dedicated relationships such as `parameterValues`, `components`, and `defaultValue`. A parameter-value annotation can optionally link to its formal parameter definition through `instanceOf`.
+Annotations can be attached through `additionalProperties` for cross-cutting metadata, bundled in a [Descriptor](../semantic_core/Descriptor.md) through `annotations`, or used through dedicated relationships such as `parameterValues`, `components`, and `defaultValue`. A parameter-value annotation can optionally link to its formal parameter definition through `instanceOf`.
 
 ## Properties
 

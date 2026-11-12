@@ -1,6 +1,6 @@
 ---
 title: Organization
-category: Administrative Profile
+category: Administrative Core
 categoryindex: 6
 index: 4
 ---

@@ -1,6 +1,6 @@
 ---
 title: Process
-category: Process Provenance Profile
+category: Provenance Core
 categoryindex: 4
 index: 3
 ---

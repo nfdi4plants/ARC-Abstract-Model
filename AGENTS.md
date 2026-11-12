@@ -12,9 +12,9 @@ ARC-Data-Model/
 │   └── project/                   canonical project guides
 │   └── spec/                      normative model specification
 │       ├── shared/                shared entity specifications
-│       ├── process_provenance/    process provenance base profile
-│       ├── semantic_designation/  semantic designation base profile
-│       └── administrative/        administrative base profile
+│       ├── provenance_core/       process provenance base profile
+│       ├── semantic_core/         semantic designation base profile
+│       └── administrative_core/   administrative base profile
 ├── schemas/                      derived schema representations
 │   ├── sql/                       executable SQLite profile and design notes
 │   ├── yml/                       JSON Schema draft 2020-12 expressed in YAML
@@ -145,6 +145,6 @@ Before marking docs plumbing work as done, run an fsdocs build or a targeted mar
 
 For portable domain API changes, run the shared behavioral tests on .NET, JavaScript, and Python, then inspect the emitted classes and type declarations. `TestBaseModel` covers all three runtimes and native consumers and is included in `RunTests`. `RunTestsDotnet`, `RunTestsJS`, and `RunTestsPy` run both libraries' shared suites for the selected runtime. A skipped or failing target is not a passing check.
 
-The [Layer 1 guide](docs/project/base-model.md) documents construction, native values, build artifacts, and Layer 2 identity policies. The FAKE targets `TestBaseModelDotNet`, `TestBaseModelJS`, `TestBaseModelPy`, and `TestBaseModelNative` can also run independently with their required build dependencies.
+The [Layer 1 guide](docs/project/abstract-model.md) documents construction, native values, build artifacts, and Layer 2 identity policies. The FAKE targets `TestBaseModelDotNet`, `TestBaseModelJS`, `TestBaseModelPy`, and `TestBaseModelNative` can also run independently with their required build dependencies.
 
 Add handwritten JavaScript/TypeScript and Python consumer tests alongside the shared F# tests. Import through the public entrypoints and exercise construction, property reads/writes, optional values, native arrays/lists, spec alternatives, duplicate preservation, and shared entity references. Type-check TypeScript callers as well as running JavaScript and Python callers. When package artifacts are produced, run these consumers against the packed artifacts too; this catches export and dependency defects that transpiled F# tests cannot detect.

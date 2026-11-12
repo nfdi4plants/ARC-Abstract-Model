@@ -1,6 +1,6 @@
 ---
 title: Agent
-category: Administrative Profile
+category: Administrative Core
 categoryindex: 6
 index: 3
 ---
@@ -24,7 +24,7 @@ The domain discriminator remains `type: Agent` regardless of the kind of agent r
 | `emails` | Text | `0..*` | SHOULD | Email addresses through which the person or software agent can be contacted. This field SHOULD be provided where applicable. |
 | `affiliations` | [Organization](Organization.md) | `0..*` | SHOULD | Organizations with which the agent is affiliated, where applicable. For a person, these may include employers or research institutions. A software agent's creator, provider, or operator does not automatically constitute an affiliation. This field SHOULD be provided where an affiliation applies. |
 | `identifiers` | Text | `0..*` | SHOULD | Identifiers by which the agent is known or referenced, such as an ORCID for a person or an identifier assigned to a software agent by a registry or application. Identifiers may be globally scoped or scoped to a particular system or context. |
-| `additionalProperties` | [Annotation](../shared/Annotation.md) | `0..*` | MAY | Extensible metadata about the person or software agent that is not covered by the base properties. |
+| `additionalProperties` | [Annotation](../shared/Annotation.md) | `0..*` | MAY | Extensible metadata about the person or software agent that is not covered by the Abstract Model properties. |
 | `jobTitles` | [DefinedTerm](../shared/DefinedTerm.md) | `0..*` | MAY | Titles describing the agent's occupation, role, or function. For a person, these may be professional titles such as researcher or data steward. For a software agent, these may describe its function, such as automated annotator or data analysis assistant. |
 
 ## Relationships

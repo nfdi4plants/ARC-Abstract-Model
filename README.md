@@ -4,7 +4,7 @@ Specification and implementation workspace for the ARC data model, with three ba
 
 The repository contains two portable F# libraries for .NET, JavaScript/TypeScript, and Python:
 
-- [ARCBaseModel](docs/project/base-model.md): mutable domain classes representing the base specification.
+- [ARCBaseModel](docs/project/abstract-model.md): mutable domain classes representing the base specification.
 - [PolyglotSQLite](docs/project/polyglot-sqlite.md): independent SQLite values, connections, transactions, and table repositories.
 
 Builds stage local native packages; registry publication is outside the current implementation scope.

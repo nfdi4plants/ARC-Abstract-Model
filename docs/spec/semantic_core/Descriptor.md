@@ -1,6 +1,6 @@
 ---
 title: Descriptor
-category: Semantic Designation Profile
+category: Semantic Core
 categoryindex: 5
 index: 3
 ---

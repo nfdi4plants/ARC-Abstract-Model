@@ -7,9 +7,9 @@ index: 1
 
 # ISA Decoration
 
-The ISA decoration maps Investigation, Study, Assay, source/sample roles, and ISA annotation roles onto the unified model. Contributor, organization, and publication entities now live in the sibling [Administrative profile](../../administrative/overview.md).
+The ISA decoration maps Investigation, Study, Assay, source/sample roles, and ISA annotation roles onto the unified model. Contributor, organization, and publication entities now live in the sibling [Administrative Core](../../administrative_core/overview.md) profile.
 
-ISA processes and protocols use the base [Process](../../process_provenance/Process.md) and [Recipe](../../process_provenance/Recipe.md) entities.
+ISA processes and protocols use the Abstract Model [Process](../../provenance_core/Process.md) and [Recipe](../../provenance_core/Recipe.md) entities.
 
 Reference: [ISA RO-Crate Profile](../../../../references/isa_ro_crate.md)
 
@@ -20,9 +20,9 @@ Reference: [ISA RO-Crate Profile](../../../../references/isa_ro_crate.md)
 - [Assay](Assay.md)
 - [Source](Source.md)
 - [Sample](Sample.md)
-- [Agent](../../administrative/Agent.md)
-- [Organization](../../administrative/Organization.md)
-- [ScholarlyArticle](../../administrative/ScholarlyArticle.md)
+- [Agent](../../administrative_core/Agent.md)
+- [Organization](../../administrative_core/Organization.md)
+- [ScholarlyArticle](../../administrative_core/ScholarlyArticle.md)
 - [Annotations](Annotations.md)
 
 

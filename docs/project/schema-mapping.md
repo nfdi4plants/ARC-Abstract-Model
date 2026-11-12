@@ -7,17 +7,17 @@ index: 6
 
 # Schema.org mapping
 
-The ARC Base Model closely follows Schema.org to support RO-Crate interoperability. This page collects recommended mappings by profile and entity, including profile conventions and mappings that depend on the target profile. The mappings are recommendations rather than strict equivalences.
+The ARC Abstract Model closely follows Schema.org to support RO-Crate interoperability. This page collects recommended mappings by profile and entity, including profile conventions and mappings that depend on the target profile. The mappings are recommendations rather than strict equivalences.
 
 Rows named after an entity describe its external type mapping. The local `type` discriminator is a separate property. Shared entities can appear in more than one profile table.
 
-## Process Provenance
+## Provenance Core
 
-Profile: [Process Provenance](../spec/process_provenance/overview.md).
+Profile: [Provenance Core](../spec/provenance_core/overview.md).
 
 ### Dataset
 
-| ARC Base Model Property | Schema.org Property | Mapping |
+| ARC Abstract Model Property | Schema.org Property | Mapping |
 |---|---|---|
 | `Dataset` | [`Dataset`](https://schema.org/Dataset) | - |
 | `id` | None | - |
@@ -32,7 +32,7 @@ Profile: [Process Provenance](../spec/process_provenance/overview.md).
 
 ### Process
 
-| ARC Base Model Property | Schema.org Property | Mapping |
+| ARC Abstract Model Property | Schema.org Property | Mapping |
 |---|---|---|
 | `Process` | [`LabProcess`](https://bioschemas.org/types/LabProcess/0.1-DRAFT) | - |
 | `id` | None | - |
@@ -46,7 +46,7 @@ Profile: [Process Provenance](../spec/process_provenance/overview.md).
 
 ### Recipe
 
-| ARC Base Model Property | Schema.org Property | Mapping |
+| ARC Abstract Model Property | Schema.org Property | Mapping |
 |---|---|---|
 | `Recipe` | [`LabProtocol`](https://bioschemas.org/types/LabProtocol/0.6-DRAFT) | - |
 | `id` | None | - |
@@ -63,7 +63,7 @@ Profile: [Process Provenance](../spec/process_provenance/overview.md).
 
 ### Sample
 
-| ARC Base Model Property | Schema.org Property | Mapping |
+| ARC Abstract Model Property | Schema.org Property | Mapping |
 |---|---|---|
 | `Sample` | [`Sample`](https://bioschemas.org/types/Sample/0.3-DRAFT) | For material samples; digital-sample mappings depend on the target profile. |
 | `id` | None | - |
@@ -74,7 +74,7 @@ Profile: [Process Provenance](../spec/process_provenance/overview.md).
 
 ### Data
 
-| ARC Base Model Property | Schema.org Property | Mapping |
+| ARC Abstract Model Property | Schema.org Property | Mapping |
 |---|---|---|
 | `Data` | [`MediaObject`](https://schema.org/MediaObject) | `File` is the RO-Crate alias for MediaObject. |
 | `id` | None | - |
@@ -89,7 +89,7 @@ Profile: [Process Provenance](../spec/process_provenance/overview.md).
 
 ### Annotation
 
-| ARC Base Model Property | Schema.org Property | Mapping |
+| ARC Abstract Model Property | Schema.org Property | Mapping |
 |---|---|---|
 | `Annotation` | [`PropertyValue`](https://schema.org/PropertyValue) | - |
 | `id` | None | - |
@@ -105,7 +105,7 @@ Profile: [Process Provenance](../spec/process_provenance/overview.md).
 
 ### FormalParameter
 
-| ARC Base Model Property | Schema.org Property | Mapping |
+| ARC Abstract Model Property | Schema.org Property | Mapping |
 |---|---|---|
 | `FormalParameter` | [`FormalParameter`](https://bioschemas.org/types/FormalParameter/1.0-RELEASE) | - |
 | `id` | None | - |
@@ -117,7 +117,7 @@ Profile: [Process Provenance](../spec/process_provenance/overview.md).
 
 ### DefinedTerm
 
-| ARC Base Model Property | Schema.org Property | Mapping |
+| ARC Abstract Model Property | Schema.org Property | Mapping |
 |---|---|---|
 | `DefinedTerm` | [`DefinedTerm`](https://schema.org/DefinedTerm) | - |
 | `id` | None | - |
@@ -129,7 +129,7 @@ Profile: [Process Provenance](../spec/process_provenance/overview.md).
 
 ### DefinedTermSet
 
-| ARC Base Model Property | Schema.org Property | Mapping |
+| ARC Abstract Model Property | Schema.org Property | Mapping |
 |---|---|---|
 | `DefinedTermSet` | [`DefinedTermSet`](https://schema.org/DefinedTermSet) | - |
 | `id` | None | - |
@@ -137,13 +137,13 @@ Profile: [Process Provenance](../spec/process_provenance/overview.md).
 | `name` | [`name`](https://schema.org/name) | - |
 | `identifier` | [`identifier`](https://schema.org/identifier) | - |
 
-## Semantic Designation
+## Semantic Core
 
-Profile: [Semantic Designation](../spec/semantic_designation/overview.md). Common Dataset mappings and the complete shared Annotation mappings are repeated here.
+Profile: [Semantic Core](../spec/semantic_core/overview.md). Common Dataset mappings and the complete shared Annotation mappings are repeated here.
 
 ### Dataset
 
-| ARC Base Model Property | Schema.org Property | Mapping |
+| ARC Abstract Model Property | Schema.org Property | Mapping |
 |---|---|---|
 | `Dataset` | [`Dataset`](https://schema.org/Dataset) | - |
 | `id` | None | - |
@@ -158,7 +158,7 @@ Profile: [Semantic Designation](../spec/semantic_designation/overview.md). Commo
 
 ### Descriptor
 
-| ARC Base Model Property | Schema.org Property | Mapping |
+| ARC Abstract Model Property | Schema.org Property | Mapping |
 |---|---|---|
 | `Descriptor` | | |
 | `id` | None | - |
@@ -169,7 +169,7 @@ Profile: [Semantic Designation](../spec/semantic_designation/overview.md). Commo
 
 ### Annotation
 
-| ARC Base Model Property | Schema.org Property | Mapping |
+| ARC Abstract Model Property | Schema.org Property | Mapping |
 |---|---|---|
 | `Annotation` | [`PropertyValue`](https://schema.org/PropertyValue) | - |
 | `id` | None | - |
@@ -183,13 +183,13 @@ Profile: [Semantic Designation](../spec/semantic_designation/overview.md). Commo
 | `unitTAN` | [`unitCode`](https://schema.org/unitCode) | Renaming |
 | `instanceOf` | [`exampleOfWork`](https://schema.org/exampleOfWork) | As a profile convention; specific mappings may depend on the target profile. |
 
-## Administrative
+## Administrative Core
 
-Profile: [Administrative](../spec/administrative/overview.md).
+Profile: [Administrative Core](../spec/administrative_core/overview.md).
 
 ### Dataset
 
-| ARC Base Model Property | Schema.org Property | Mapping |
+| ARC Abstract Model Property | Schema.org Property | Mapping |
 |---|---|---|
 | `Dataset` | [`Dataset`](https://schema.org/Dataset) | - |
 | `id` | None | - |
@@ -212,7 +212,7 @@ Profile: [Administrative](../spec/administrative/overview.md).
 
 A related provenance concept is [`prov:Agent`](https://www.w3.org/TR/prov-o/#Agent), with [`prov:Person`](https://www.w3.org/TR/prov-o/#Person) and [`prov:SoftwareAgent`](https://www.w3.org/TR/prov-o/#SoftwareAgent) specializations.
 
-| ARC Base Model Property | Schema.org Property | Mapping |
+| ARC Abstract Model Property | Schema.org Property | Mapping |
 |---|---|---|
 | `Agent` | [`Person`](https://schema.org/Person); [`SoftwareApplication`](https://schema.org/SoftwareApplication) | Person for people; SoftwareApplication for software agents. The local discriminator remains `Agent`. |
 | `id` | None | - |
@@ -229,7 +229,7 @@ A related provenance concept is [`prov:Agent`](https://www.w3.org/TR/prov-o/#Age
 
 ### Organization
 
-| ARC Base Model Property | Schema.org Property | Mapping |
+| ARC Abstract Model Property | Schema.org Property | Mapping |
 |---|---|---|
 | `Organization` | [`Organization`](https://schema.org/Organization) | - |
 | `id` | None | - |
@@ -240,7 +240,7 @@ A related provenance concept is [`prov:Agent`](https://www.w3.org/TR/prov-o/#Age
 
 ### ScholarlyArticle
 
-| ARC Base Model Property | Schema.org Property | Mapping |
+| ARC Abstract Model Property | Schema.org Property | Mapping |
 |---|---|---|
 | `ScholarlyArticle` | [`ScholarlyArticle`](https://schema.org/ScholarlyArticle) | - |
 | `id` | None | - |
@@ -258,7 +258,7 @@ Decoration profile: [Datamap](../spec/decorations/datamap/overview.md).
 
 ### Dataset
 
-| ARC Base Model Property | Schema.org Property | Mapping |
+| ARC Abstract Model Property | Schema.org Property | Mapping |
 |---|---|---|
 | `Dataset` | [`Dataset`](https://schema.org/Dataset) | - |
 | `additionalType` | [`additionalType`](https://schema.org/additionalType) | - |
@@ -267,7 +267,7 @@ Decoration profile: [Datamap](../spec/decorations/datamap/overview.md).
 
 ### DataContext
 
-| ARC Base Model Property | Schema.org Property | Mapping |
+| ARC Abstract Model Property | Schema.org Property | Mapping |
 |---|---|---|
 | `DataContext` | [`PropertyValue`](https://schema.org/PropertyValue) | - |
 | `data` | [`subjectOf`](https://schema.org/subjectOf) | Renaming |

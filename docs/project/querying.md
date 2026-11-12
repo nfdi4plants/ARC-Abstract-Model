@@ -71,9 +71,9 @@ I.e. if we ask for a path of a specific sample, we want to get all paths (i.e. d
         - Interpret file fragments using the declared selector format
         - Collect upstream annotations to filter data by process-derived metadata
         - Match semantic descriptors and fragment coverage to find the relevant Datamap entries
-        - Pass the resulting file path and selectors to a dataframe or plotting library outside ARC Core
+        - Pass the resulting file path and selectors to a dataframe or plotting library outside the ARC Abstract Model
 
-The [Layer 1 guide](base-model.md) describes the available domain API and its boundaries.
+The [Layer 1 guide](abstract-model.md) describes the available domain API and its boundaries.
 
 
 
