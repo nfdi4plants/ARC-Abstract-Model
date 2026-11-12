@@ -14,7 +14,7 @@ ARC Abstract Model is the workspace for the unified ARC RDM data model. It conta
 ```text
 ARC-Abstract-Model/
 |-- docs/                 fsdocs documentation pages
-|   `-- spec/             Abstract Model profiles and domain-specific decoration profiles
+|   `-- spec/             Abstract Model and domain-specific decoration profiles
 |-- schemas/              derived SQL and YAML schema representations
 |-- examples/             concrete YAML examples
 |-- references/           upstream and prior implementation reference material
@@ -25,7 +25,7 @@ ARC-Abstract-Model/
 
 ## Main Areas
 
-- [Specification](specification.md) describes the three ARC Abstract Model profiles and their decoration profiles.
+- [Specification](specification.md) describes the ARC Abstract Model and its decoration profiles.
 - [Examples and schemas](examples-and-schemas.md) explains the current schema drafts and example status.
 - [Implementation](implementation.md) explains the F# projects, SQL profile, runtime adapters, and build commands.
 - [Reference material](references.md) lists upstream profiles and preserved implementation notes.

@@ -7,7 +7,7 @@ index: 3
 
 # Decorations
 
-Decoration profiles are domain-specific extensions of the Abstract Model profiles. They specialize Abstract Model types through `additionalType`, define decoration-specific properties, and add entities only where the domain needs concepts that do not have a direct Abstract Model counterpart.
+Decoration profiles are domain-specific extensions of the Abstract Model. They specialize Abstract Model types through `additionalType`, define decoration-specific properties, and add entities only where the domain needs concepts that do not have a direct Abstract Model counterpart.
 
 ## Available Decorations
 

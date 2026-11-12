@@ -13,7 +13,7 @@ The repository implements the ARC Abstract Model specification and portable SQLi
 
 | Project | Role | Runtime |
 |---------|------|---------|
-| `src/ARCBaseModel` | Layer 1 domain classes for all three Abstract Model profiles | .NET, JavaScript, Python |
+| `src/ARCBaseModel` | Layer 1 domain classes for the Abstract Model | .NET, JavaScript, Python |
 | `src/PolyglotSQLite` | SQLite values, connections, transactions, and generic table repositories | .NET, Node, Python |
 | `tests/ARCBaseModel.Tests` | Shared domain behavior and mapping probe | .NET, JavaScript, Python |
 | `tests/ARCBaseModel.Native` | Handwritten JavaScript, TypeScript, and Python consumers | Node, Python |

@@ -16,7 +16,7 @@ libraries for working across .NET, JavaScript, and Python runtimes.
 ## Start Here
 
 - [Project overview](project/overview.md)
-- [Abstract Model profiles](spec/index.md)
+- [Abstract Model](spec/index.md)
 - [Decoration profiles](spec/decorations/overview.md)
 - [Specification guide](project/specification.md)
 - [Implementation guide](project/implementation.md)
@@ -31,20 +31,16 @@ libraries for working across .NET, JavaScript, and Python runtimes.
 ```mermaid
 flowchart TB
     arc[ARC Abstract Model]
-    profiles[Abstract Model Profiles]
     decorations[Decoration Profiles]
 
-    arc --> profiles
-    arc --> decorations
-
-    profiles --> provenance[Provenance Core]
-    profiles --> semantics[Semantic Core]
-    profiles --> administrative[Administrative Core]
+    arc --> provenance[Provenance Core]
+    arc --> semantics[Semantic Core]
+    arc --> administrative[Administrative Core]
 
     decorations --> isa[ISA]
     decorations --> workflow[Workflow Run]
     decorations --> datamap[Datamap]
 
-    decorations -. extend .-> profiles
+    decorations -. extend .-> arc
 ```
 

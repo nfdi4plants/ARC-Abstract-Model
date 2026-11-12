@@ -9,7 +9,7 @@ index: 2
 
 The normative specification lives in [docs/spec](../spec/index.md). The repository organizes the ARC Abstract Model into three profiles: Provenance Core, Semantic Core, and Administrative Core. Decoration profiles, including Datamap, add domain-specific refinements. The implementation remains one shared model; profile boundaries are documentation and mapping boundaries, not runtime type boundaries.
 
-## Abstract Model Profiles
+## Abstract Model
 
 ```mermaid
 flowchart LR
@@ -51,9 +51,9 @@ Shared model entities:
 | Organization | [Organization](../spec/administrative_core/Organization.md) |
 | ScholarlyArticle | [ScholarlyArticle](../spec/administrative_core/ScholarlyArticle.md) |
 
-Abstract Model profile entry points:
+Abstract Model entry points:
 
-| Abstract Model Profile | Purpose | Source |
+| Profile | Purpose | Source |
 |--------------|---------|--------|
 | Provenance Core | Provenance through datasets, processes, protocols, samples, data, and annotations | [Provenance Core](../spec/provenance_core/overview.md) |
 | Semantic Core | Semantic descriptions that connect datasets, samples, and data with bundled annotations | [Semantic Core](../spec/semantic_core/overview.md) |

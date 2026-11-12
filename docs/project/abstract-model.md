@@ -12,7 +12,7 @@ F# classes targeting .NET Standard 2.0. The same source produces JavaScript with
 TypeScript declarations and an importable Python package. Native callers use
 ordinary constructors, properties, arrays or lists, and primitive values.
 
-One `Dataset` class combines the three Abstract Model profiles. `ConformsTo` declares one
+One `Dataset` class combines all three profiles. `ConformsTo` declares one
 or more applicable profiles; it does not select a different runtime class.
 Nested datasets declare their own profiles independently of their parent.
 
